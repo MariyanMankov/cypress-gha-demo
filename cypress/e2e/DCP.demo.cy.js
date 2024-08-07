@@ -50,7 +50,7 @@ describe('Successful login tests', () => {
     LoginPage.setUserEmail(User.email);
     LoginPage.setUserPassword(User.password);
     LoginPage.clickLoginButton();
-    PageToolbar.checkTheUserType("Basicc");
+    PageToolbar.checkTheUserType("Basic");
   })
 })
 
