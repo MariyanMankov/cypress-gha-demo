@@ -54,7 +54,7 @@ describe('Successful login tests', () => {
   })
 })
 
-describe('Successful login tests2', () => {
+describe('Unsuccessful login tests', () => {
 
   const LoginPage = new Login();
   const PageToolbar = new Toolbar();
@@ -65,43 +65,32 @@ describe('Successful login tests2', () => {
     LoginPage.loadPage();
   })
 
-  it('Premium Complete Login', () => {
+  it('Empty password', () => {
 
     User.getPremiumCompleteUser();
 
     LoginPage.setUserEmail(User.email);
-    LoginPage.setUserPassword(User.password);
     LoginPage.clickLoginButton();
-    PageToolbar.checkTheUserType("Premium Complete");
+    LoginPage.checkThatThePasswordErrorIsPresent();
   })
 
-  it('Premium Single Login', () => {
+  it('Empty email', () => {
 
-    User.getPremiumSingleUser();
+    User.getPremiumCompleteUser();
+
+    LoginPage.setUserPassword(User.password);
+    LoginPage.clickLoginButton();
+    LoginPage.checkThatTheEmailErrorIsPresent();
+  })
+
+  it('Invalid password', () => {
+
+    User.getPremiumCompleteUser();
 
     LoginPage.setUserEmail(User.email);
-    LoginPage.setUserPassword(User.password);
+    LoginPage.setUserPassword('Test123');
     LoginPage.clickLoginButton();
-    PageToolbar.checkTheUserType("Premium Single");
+    LoginPage.checkThatTheLoginAllertIsPresent();
   })
 
-  it('Premium Collection Login', () => {
-
-    User.getPremiumCollectionUser();
-
-    LoginPage.setUserEmail(User.email);
-    LoginPage.setUserPassword(User.password);
-    LoginPage.clickLoginButton();
-    PageToolbar.checkTheUserType("Premium Collection");
-  })
-
-  it('Basic Login', () => {
-
-    User.getBasicUser();
-
-    LoginPage.setUserEmail(User.email);
-    LoginPage.setUserPassword(User.password);
-    LoginPage.clickLoginButton();
-    PageToolbar.checkTheUserType("Basic");
-  })
 })
